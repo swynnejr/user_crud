@@ -35,13 +35,17 @@ class User():
 # The creates the new user in the db by interacting directly with MySQL
     @classmethod
 # The data being passed in here comes from the @app.route('/users/create') function create_user via the call to request.form
-    def create_user(cls, form):
+# Normally this has the parameters (cls, data), but if your FORM matches your data you can just SKIP inputting data ={} below
+    def create_user(cls, data):
 # It is best to test your query in MySQL then copy it in here
 # the %(data)s formatting helps prevent SQL Injection of malicious code
         query = 'INSERT INTO users (first_name, last_name, email) VALUES (%(first_name)s, %(last_name)s, %(email)s);'
-
-        data = {
-            'first_name': form['first_name'],
-            'last_name': form['last_name'],
-            'email': form['email']
-        }
+# This is ONLY necessary if your FORM fields are different from your query fields
+        # data = {
+        #     'first_name': form['first_name'],
+        #     'last_name': form['last_name'],
+        #     'email': form['email']
+        # }
+# This connects to MySQL to run our query and pull our data
+# For this project we don't have to 'return' but it is good practice
+        return connectToMySQL('users').query_db(query, data)
