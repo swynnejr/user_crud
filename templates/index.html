@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+</head>
+<body>
+    <h1>These are our users</h1>
+    <ul>
+<!-- This is a for loop that is able to talk to jinji to dynamically populate our render_template -->
+        {% for user in users %}
+<!-- This is an OBJECT that has the poperty of ID given to it from the user.py file that holds the User CLASS that contains def  __init__ (self, data) function that established self.id = data['id'] etc-->
+        <li>ID: {{user.id}} First name: {{user.first_name}} Last name: {{user.last_name}}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Create a new user:</h2>
+    <form action="/users/create" method="POST">
+        First Name: <input type="text" name='first_name'><br>
+        Last Name: <input type="text" name='last_name'><br>
+        Email: <input type="text" name='email'><br>
+        <input type="submit">
+    </form>
+</body>
+</html>
