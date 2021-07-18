@@ -50,3 +50,10 @@ class User():
 # This connects to MySQL to run our query and pull our data
 # For this project we don't have to 'return' but it is good practice
         return connectToMySQL('users').query_db(query, data)
+
+    @classmethod
+    def delete_user(cls, data):
+
+        query = "DELETE FROM users WHERE id = %(id)s;"
+
+        connectToMySQL('users').query_db(query, data)
