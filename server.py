@@ -17,6 +17,10 @@ def index():
 # This will tell our homepage ('/') to use index.html to render a template and users in green is the data we are passing it, from user in pink that got its value passed to it from User.get_all_users()
     return render_template('index.html', users = users)
 
+@app.route('/create')
+def create_form():
+    return render_template('create.html')
+
 # This function is called when the URL is visited. Since it is uses methods POST you don't actually see this page, when the function is run it REDIRECTS to another page where we have a template to show the data
 @app.route('/users/create', methods=['POST'])
 def create_user():

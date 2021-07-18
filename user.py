@@ -38,7 +38,8 @@ class User():
 # Normally this has the parameters (cls, data), but if your FORM matches your data you can just SKIP inputting data ={} below
     def create_user(cls, data):
 # It is best to test your query in MySQL then copy it in here
-# the %(data)s formatting helps prevent SQL Injection of malicious code
+# the %(data)s is a SQL prepared statment and acts as an IOU to python promising the info is coming.
+# This formatting also helps prevent SQL Injection of malicious code
         query = 'INSERT INTO users (first_name, last_name, email) VALUES (%(first_name)s, %(last_name)s, %(email)s);'
 # This is ONLY necessary if your FORM fields are different from your query fields
         # data = {
