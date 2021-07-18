@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Show User {{user.id}}</title>
+    <title>Show User</title>
 </head>
 <body>
     <h1>User {{user.id}}</h1>
-    <ul>
+    <ul style="border: 2px solid black;">
         <li>Full Name: {{user.first_name}} {{user.last_name}}</li>
         <li>Email: {{user.email}}</li>
         <li>Member Since: {{user.created_at.strftime('%m-%Y')}}</li>

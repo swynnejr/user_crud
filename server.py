@@ -28,15 +28,24 @@ def create_user():
 # This is what calls the method inside of our User class to request the data from our "create user" form
     User.create_user(request.form)
 #  REDIRECT IS REQUIRED FOR methods=['POST']
-    return redirect('/show/<int:user.id>')
+    return redirect('/show/<int:user_id>')
 
-@app.route('/users/<int:user.id>/delete')
+# The user_id is getting pulled from the data field
+@app.route('/users/<int:user_id>/delete')
 def delete_user(user_id):
     data = {
         'id': user_id
     }
     User.delete_user(data)
     return redirect('/')
+
+@app.route('/users/<int:user_id>/show')
+def show_one_user(user_id):
+    data = {
+        'id': user_id
+    }
+    user = User.show_one_user(data)
+    return render_template('show_user.hmtl', user = user)
 
 if __name__ == "__main__":
     app.run(debug=True)

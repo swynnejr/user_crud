@@ -32,6 +32,15 @@ class User():
 
         return users
 
+    @classmethod
+    def show_one_user(cls, data):
+
+        query = "SELECT * FROM users WHERE id = (%(id)s);"
+
+        results = connectToMySQL('users').query_db(query, data)
+
+        return User(results[0])
+
 # The creates the new user in the db by interacting directly with MySQL
     @classmethod
 # The data being passed in here comes from the @app.route('/users/create') function create_user via the call to request.form
