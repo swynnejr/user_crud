@@ -31,3 +31,17 @@ class User():
             users.append(User(item))
 
         return users
+
+# The creates the new user in the db by interacting directly with MySQL
+    @classmethod
+# The data being passed in here comes from the @app.route('/users/create') function create_user via the call to request.form
+    def create_user(cls, form):
+# It is best to test your query in MySQL then copy it in here
+# the %(data)s formatting helps prevent SQL Injection of malicious code
+        query = 'INSERT INTO users (first_name, last_name, email) VALUES (%(first_name)s, %(last_name)s, %(email)s);'
+
+        data = {
+            'first_name': form['first_name'],
+            'last_name': form['last_name'],
+            'email': form['email']
+        }

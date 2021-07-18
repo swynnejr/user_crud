@@ -19,8 +19,11 @@ def index():
 
 # This function is called when the URL is visited. Since it is uses methods POST you don't actually see this page, when the function is run it REDIRECTS to another page where we have a template to show the data
 @app.route('/users/create', methods=['POST'])
-def create_order():
-    print(request.form)
+def create_user():
+    # print(request.form) FUNCTIONALITY TEST ONLY: Use this to check your terminal to see if your dictionary is being recieved by your form
+# This is what calls the method inside of our User class to request the data from our "create user" form
+    User.create_user(request.form)
+#  REDIRECT IS REQUIRED FOR methods=['POST']
     return redirect('/')
 
 if __name__ == "__main__":
