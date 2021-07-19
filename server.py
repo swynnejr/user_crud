@@ -19,18 +19,21 @@ def index():
 
 @app.route('/create')
 def create_form():
+# FUNCTIONALITY TEST: If you have complicated HTML or @app.route and you are getting confusing error messages, have @app.route return :) instead of render_template and you can check just this part
     return render_template('create.html')
 
 # This function is called when the URL is visited. Since it is uses methods POST you don't actually see this page, when the function is run it REDIRECTS to another page where we have a template to show the data
 @app.route('/users/create', methods=['POST'])
 def create_user():
     # print(request.form) FUNCTIONALITY TEST ONLY: Use this to check your terminal to see if your dictionary is being recieved by your form
-# This is what calls the method inside of our User class to request the data from our "create user" form
-    User.create_user(request.form)
+# This is what calls the method inside of our User class to request the data from our "create user" form.
+# In this specific case we set the user_id to hold the value from this form so we can redirect properly. More details below.
+    user_id = User.create_user(request.form)
 #  REDIRECT IS REQUIRED FOR methods=['POST']
-    return redirect('/')
+    return redirect(f'/users/{user_id}/show')
 # THIS WONT WORK >>> WHY???
 # return redirect('/users/<int:user_id>/show') OR (f'/users/{user_id}/show') < From def update_user
+# HERE IS WHY! the f'string works if you set user_id = User.create_user(request.form)
 
 
 # The user_id is getting pulled from the data field
@@ -60,6 +63,8 @@ def edit_user(user_id):
     }
     user = User.show_one_user(data)
     return render_template('edit_user.html', user = user)
+
+# If you catch weird errors here (or any multistep method POST that has redirects, queries, and render templates), check the database and check to see if chnages are being made there, so you can narrow down the error to going OUT to the db or coming IN from the db.
 
 @app.route('/users/<int:user_id>/update', methods=['POST'])
 def update_user(user_id):
