@@ -64,7 +64,7 @@ def edit_user(user_id):
     user = User.show_one_user(data)
     return render_template('edit_user.html', user = user)
 
-# If you catch weird errors here (or any multistep method POST that has redirects, queries, and render templates), check the database and check to see if chnages are being made there, so you can narrow down the error to going OUT to the db or coming IN from the db.
+# If you catch weird errors here (or any multistep method POST that has redirects, queries, and render templates), check the database and check to see if changes are being made there, so you can narrow down the error to going OUT to the db or coming IN from the db.
 
 @app.route('/users/<int:user_id>/update', methods=['POST'])
 def update_user(user_id):
