@@ -29,7 +29,8 @@ def create_user():
     User.create_user(request.form)
 #  REDIRECT IS REQUIRED FOR methods=['POST']
     return redirect('/')
-# THIS WONT WORK >>> WHY??? return redirect('/users/<int:user_id>/show')
+# THIS WONT WORK >>> WHY???
+# return redirect('/users/<int:user_id>/show') OR (f'/users/{user_id}/show') < From def update_user
 
 
 # The user_id is getting pulled from the data field
@@ -69,7 +70,7 @@ def update_user(user_id):
         'email': request.form['email']
     }
     User.update_user(data)
-    return redirect('/')
+    return redirect(f'/users/{user_id}/show')
 
 if __name__ == "__main__":
     app.run(debug=True)
